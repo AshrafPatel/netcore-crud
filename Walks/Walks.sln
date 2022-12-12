@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Walks.API", "Walks.API\Walks.API.csproj", "{8443AC37-C786-4CF2-9A4E-97F42BDB9580}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Walks.API", "Walks.API\Walks.API.csproj", "{8443AC37-C786-4CF2-9A4E-97F42BDB9580}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalksTests", "WalksTests\WalksTests.csproj", "{0127D171-A935-4EFE-94D2-0474CECB454C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{8443AC37-C786-4CF2-9A4E-97F42BDB9580}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8443AC37-C786-4CF2-9A4E-97F42BDB9580}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8443AC37-C786-4CF2-9A4E-97F42BDB9580}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0127D171-A935-4EFE-94D2-0474CECB454C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0127D171-A935-4EFE-94D2-0474CECB454C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0127D171-A935-4EFE-94D2-0474CECB454C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0127D171-A935-4EFE-94D2-0474CECB454C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
