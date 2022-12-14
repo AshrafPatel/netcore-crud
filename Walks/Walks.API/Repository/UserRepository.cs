@@ -1,23 +1,63 @@
-﻿using Walks.API.Extension;
+﻿using Microsoft.EntityFrameworkCore;
+using Walks.API.Data;
+using Walks.API.Extension;
+using Walks.API.Models.Domain;
 using Walks.API.Models.DTO;
 
 namespace Walks.API.Repository
 {
     public class UserRepository : IUserRepository
     {
-        public Task<UserDto> Login(LoginDto loginDto)
+        private readonly WalksDbContext _walksDbContext;
+
+        public UserRepository(WalksDbContext walksDbContext)
         {
-            throw new NotImplementedException();
+            _walksDbContext = walksDbContext;
         }
 
-        public Task<UserDto> Register(RegisterDto registerDto)
+        public async Task<User> AddAsync(User user)
         {
-            HashSalt hashSalt = HashSalt.GenerateSaltedHash(256, "password1");
+            user.Id = Guid.NewGuid();
+            await _walksDbContext.Users.AddAsync(user);
+            await _walksDbContext.SaveChangesAsync();
+            return user;
+        }
 
-            //Your code here
+        public async Task<User> DeleteAsync(Guid id)
+        {
+            var user = await _walksDbContext.Users.FirstOrDefaultAsync(x => x.Id == id);
+            if (user == null) { return null; }
+            _walksDbContext.Users.Remove(user);
+            await _walksDbContext.SaveChangesAsync();
+            return user;
+        }
 
-            cmd.Parameters.AddWithValue("@hash", hashSalt.Hash);
-            cmd.Parameters.AddWithValue("@salt", hashSalt.Salt);
+        public async Task<IEnumerable<User>> GetAllAsync()
+        {
+            var users = await _walksDbContext.Users.ToListAsync();
+            return users;
+        }
+
+        public async Task<User> GetAsync(Guid id)
+        {
+            var user = await _walksDbContext.Users.FirstOrDefaultAsync(x => x.Id == id);
+            if (user == null) { return null; }
+            return user;
+        }
+
+        public async Task<User> UpdateAsync(Guid id, User user)
+        {
+            var existingUser = await _walksDbContext.Users.FirstOrDefaultAsync(x => x.Id == id);
+            if (user == null) { return null; }
+
+            existingUser.UserName = user.UserName;
+            existingUser.PasswordHash = user.PasswordHash;
+            existingUser.PasswordSalt = user.PasswordSalt;
+            existingUser.Role = user.Role;
+
+            return existingUser;
+
+
         }
     }
 }

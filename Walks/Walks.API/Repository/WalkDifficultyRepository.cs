@@ -25,6 +25,7 @@ namespace Walks.API.Repository
             var walkDifficulty = await _walksDbContext.WalkDifficulties.FirstOrDefaultAsync(x => x.Id == id);
             if (walkDifficulty == null) { return null; }
             _walksDbContext.WalkDifficulties.Remove(walkDifficulty);
+            await _walksDbContext.SaveChangesAsync();
             return walkDifficulty;
         }
 
