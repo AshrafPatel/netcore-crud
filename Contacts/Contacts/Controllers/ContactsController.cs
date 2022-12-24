@@ -33,6 +33,16 @@ namespace Contacts.Controllers
             return Ok(contact);
         }
 
+        [HttpGet]
+        [ActionName("GetAContactsByName")]
+        [Route("{name:string}")]
+        public async Task<IActionResult> GetContactsByName([FromRoute] string name)
+        {
+            var contacts = await _contactRepository.FindContactByName(name);
+            if (contacts == null) { return NotFound();}
+            return Ok(contacts);
+        }
+
         [HttpPost]
         [ActionName("AddContactAsync")]
         public async Task<IActionResult> AddContactAsync([FromBody] Contact contact)

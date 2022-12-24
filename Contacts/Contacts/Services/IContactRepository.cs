@@ -9,5 +9,6 @@ namespace Contacts.Services
         Task<IEnumerable<Contact>> GetAllContacts();
         Task<Contact> GetContactAsync(Guid id);
         Task<Contact> UpdateAsync(Guid id, Contact contact);
+        Task<List<Contact>> FindContactByName(string name);
     }
 }

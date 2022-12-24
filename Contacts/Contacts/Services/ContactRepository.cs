@@ -50,5 +50,12 @@ namespace Contacts.Services
             await _contactDbContext.SaveChangesAsync();
             return contactInDb;
         }
+
+        public async Task<List<Contact>> FindContactByName(string name)
+        {
+            List<Contact> contacts = await _contactDbContext.Contacts.Where(x => x.Name.Contains(name)).ToListAsync();
+            if (contacts == null) { return null; }
+            return contacts;
+        }
     }
 }
