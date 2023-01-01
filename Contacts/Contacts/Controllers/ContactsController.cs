@@ -35,7 +35,7 @@ namespace Contacts.Controllers
 
         [HttpGet]
         [ActionName("GetAContactsByName")]
-        [Route("{name:string}")]
+        [Route("{name}")]
         public async Task<IActionResult> GetContactsByName([FromRoute] string name)
         {
             var contacts = await _contactRepository.FindContactByName(name);

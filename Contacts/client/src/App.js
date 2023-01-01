@@ -1,10 +1,11 @@
-import Contact from './Contact';
+import Contact from './Background';
 import './App.css';
+import Background from './Background';
 
 function App() {
   return (
     <div className="App">
-      <Contact/>
+      <Background/>
     </div>
   );
 }
