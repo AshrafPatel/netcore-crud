@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
+using Contacts.Services.Contacts;
+using Contacts.Services.Profiles;
 
 namespace Contacts.Services
 {
@@ -6,12 +9,11 @@ namespace Contacts.Services
     {
         public static IServiceCollection AddAppServices(this IServiceCollection services)
         {
-            // Register service-layer types
-            services.AddScoped<ITodoService, TodoService>();
+            services.AddAutoMapper(cfg => {
+                cfg.AddProfile<MapperConfig>();
+            });
 
-            // Register other services here, e.g.:
-            // services.AddScoped<IOtherService, OtherService>();
-
+            services.AddScoped<IContactService, ContactService>();
             return services;
         }
     }

@@ -20,4 +20,11 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Contacts.Data\Contacts.Data.csproj" />
+    <ProjectReference Include="..\Contacts.Repositories\Contacts.Repositories.csproj" />
+    <ProjectReference Include="..\Contacts.Services\Contacts.Services.csproj" />
+    <ProjectReference Include="..\Contacts.UI\Contacts.UI.csproj" />
+  </ItemGroup>
+
 </Project>

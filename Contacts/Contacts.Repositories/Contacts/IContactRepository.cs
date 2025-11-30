@@ -1,12 +1,12 @@
-﻿using Contacts.Models;
+﻿using Contacts.Data.Models;
 
-namespace Contacts.Services
+namespace Contacts.Services.Contacts
 {
     public interface IContactRepository
     {
         Task<Contact> AddAsync(Contact contact);
         Task DeleteAsync(Guid id);
-        Task<IEnumerable<Contact>> GetAllContacts();
+        Task<List<Contact>> GetAllContacts();
         Task<Contact> GetContactAsync(Guid id);
         Task<Contact> UpdateAsync(Guid id, Contact contact);
         Task<List<Contact>> FindContactByName(string name);

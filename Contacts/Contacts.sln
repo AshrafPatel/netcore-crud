@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.0.11205.157 d18.0
+VisualStudioVersion = 18.0.11205.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contacts", "Contacts\Contacts.csproj", "{1641A5F9-131D-4CB7-BC15-4C9B9F220409}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contacts.Data", "Contacts.Data\Contacts.Data.csproj", "{79CC4812-3483-40CC-8A3E-D5AF98922289}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contacts.DTO", "Contacts.DTO\Contacts.DTO.csproj", "{E54ADDAA-DE8B-440A-B69A-07CA50EF8306}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contacts.Controllers", "Contacts.Controllers\Contacts.Controllers.csproj", "{1F680F7F-69D2-438D-A533-4C4C3A9571D8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contacts.Repositories", "Contacts.Repositories\Contacts.Repositories.csproj", "{A87CC04F-D526-4672-B558-CDEA30D73D49}"
 EndProject
@@ -35,10 +33,6 @@ Global
 		{E54ADDAA-DE8B-440A-B69A-07CA50EF8306}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E54ADDAA-DE8B-440A-B69A-07CA50EF8306}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E54ADDAA-DE8B-440A-B69A-07CA50EF8306}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1F680F7F-69D2-438D-A533-4C4C3A9571D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1F680F7F-69D2-438D-A533-4C4C3A9571D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1F680F7F-69D2-438D-A533-4C4C3A9571D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1F680F7F-69D2-438D-A533-4C4C3A9571D8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A87CC04F-D526-4672-B558-CDEA30D73D49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A87CC04F-D526-4672-B558-CDEA30D73D49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A87CC04F-D526-4672-B558-CDEA30D73D49}.Release|Any CPU.ActiveCfg = Release|Any CPU

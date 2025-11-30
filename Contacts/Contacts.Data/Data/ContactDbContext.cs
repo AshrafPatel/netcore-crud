@@ -1,4 +1,4 @@
-﻿using Contacts.Models;
+﻿using Contacts.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Contacts.Data
