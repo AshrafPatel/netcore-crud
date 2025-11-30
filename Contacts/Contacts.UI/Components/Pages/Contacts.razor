@@ -1,0 +1,29 @@
+﻿@page "/contacts"
+@using global::Contacts.DTO
+@using global::Contacts.UI.Services
+@inject ContactsApiClient Api
+
+<h3>Contacts</h3>
+
+@if (contacts == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <ul>
+        @foreach (var c in contacts)
+        {
+            <li>@c.Name - @c.Email</li>
+        }
+    </ul>
+}
+
+@code {
+    List<ContactDto>? contacts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        contacts = await Api.GetAllAsync();
+    }
+}

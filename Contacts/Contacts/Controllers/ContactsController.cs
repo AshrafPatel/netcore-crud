@@ -1,7 +1,9 @@
-﻿using Contacts.DTO;
+﻿using Contacts.Data.Models;
+using Contacts.DTO;
 using Contacts.Services.Contacts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace Contacts.Controllers.Contacts
 {
@@ -22,7 +24,10 @@ namespace Contacts.Controllers.Contacts
         [ActionName("GetAllContactsAsync")]
         public async Task<IActionResult> GetAllContactsAsync()
         {
-            return Ok(await _contactService.GetAllContacts());
+            _logger.LogInformation("Getting all contacts");
+            List<ContactDto> contacts = await _contactService.GetAllContacts() ?? new List<ContactDto>();
+            _logger.LogInformation("Returning {Count} contacts", contacts.Count);
+            return Ok(contacts);
         }
 
         [HttpGet]
@@ -30,8 +35,13 @@ namespace Contacts.Controllers.Contacts
         [Route("{id:guid}")]
         public async Task<IActionResult> GetAContactAsync([FromRoute] Guid id)
         {
-            var contact = await _contactService.GetContactAsync(id);
-            if (contact == null) { return NotFound(); }
+            _logger.LogInformation("Getting contact with ID: {ContactId}", id);
+            ContactDto? contact = await _contactService.GetContactAsync(id);
+            if (contact == null)
+            {
+                _logger.LogWarning("No contact found with ID: {ContactId}", id);
+                return NotFound();
+            }
             return Ok(contact);
         }
 
@@ -40,28 +50,42 @@ namespace Contacts.Controllers.Contacts
         [Route("{name}")]
         public async Task<IActionResult> GetContactsByName([FromRoute] string name)
         {
-            var contacts = await _contactService.FindContactByName(name);
-            if (contacts == null) { return NotFound();}
+            _logger.LogInformation("Getting contacts with Name: {ContactName}", name);
+            List<ContactDto> contacts = await _contactService.FindContactByName(name) ?? new List<ContactDto>();
+            _logger.LogInformation("{Count} contacts found for name {Name}", contacts.Count, name);
             return Ok(contacts);
         }
 
         [HttpPost]
         [ActionName("AddContactAsync")]
-        public async Task<IActionResult> AddContactAsync([FromBody] ContactDto contactDto)
+        public async Task<IActionResult> AddContactAsync([FromBody, Required] ContactDto contactDto)
         {
+            _logger.LogInformation("Adding a new contact with Name: {ContactName}", contactDto.Name);
+
             bool isCreated = await _contactService.AddAsync(contactDto);
-            return CreatedAtAction(nameof(GetAContactAsync), contactDto);
+            if (!isCreated)
+            {
+                _logger.LogWarning("While logging contact could not be created");
+                return BadRequest("Could not create contact.");
+            }
+
+            return CreatedAtAction(nameof(GetAContactAsync), new { id = contactDto.Id }, contactDto);
         }
 
         [HttpPut]
         [ActionName("UpdateContactAsync")]
         [Route("{id:guid}")]
-        public async Task<IActionResult> UpdateContactAsync([FromRoute] Guid id, [FromBody] ContactDto contactDto)
+        public async Task<IActionResult> UpdateContactAsync([FromRoute] Guid id, [FromBody, Required] ContactDto contactDto)
         {
-            var contactInDb = await _contactService.GetContactAsync(id);
-            if (contactInDb == null) { return NotFound(); }
+            _logger.LogInformation("Updating contact with ID: {ContactId}", id);
 
-            contactInDb = await _contactService.UpdateAsync(id, contactDto);
+            ContactDto contactInDb = await _contactService.UpdateAsync(id, contactDto);   
+            if (contactInDb == null)
+            {
+                _logger.LogWarning("Contact not found: {ContactId}", id);
+                return NotFound();
+            }
+           
             return Ok(contactInDb);
         }
 
@@ -70,11 +94,16 @@ namespace Contacts.Controllers.Contacts
         [Route("{id:guid}")]
         public async Task<IActionResult> DeleteContactAsync([FromRoute] Guid id)
         {
-            var contactInDb = await _contactService.GetContactAsync(id);
-            if (contactInDb == null) { return NotFound();  }
+            _logger.LogInformation("Deleting contact with ID: {ContactId}", id);
 
-            await _contactService.DeleteAsync(id);
-            return RedirectToAction(nameof(GetAllContactsAsync));
+            bool isDeleted = await _contactService.DeleteAsync(id);
+            if (isDeleted == false)
+            {
+                _logger.LogWarning("Contact not found or could not be deleted: {ContactId}", id);
+                return NotFound();
+            }
+
+            return NoContent();
         }
     }
 }
