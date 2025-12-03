@@ -5,10 +5,24 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
+	<HttpsPort>7010</HttpsPort>
+	<AspNetCoreHostingModel>Server</AspNetCoreHostingModel>
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="properties\launchSettings.json" />
+  </ItemGroup>
+	
+	
+
+  <ItemGroup>
     <ProjectReference Include="..\Contacts.DTO\Contacts.DTO.csproj" />
+  </ItemGroup>
+	
+	
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>
