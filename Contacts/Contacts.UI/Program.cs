@@ -8,9 +8,12 @@ builder.Services.AddScoped(sp =>
 
 builder.Services.AddScoped<ContactsApiClient>();
 
+
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddApplicationInsightsTelemetry();
 
 var app = builder.Build();
 

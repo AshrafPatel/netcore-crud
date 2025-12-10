@@ -1,7 +1,6 @@
 ﻿using Contacts.Data.Models;
 using Contacts.DTO;
 using Contacts.Services.Contacts;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 

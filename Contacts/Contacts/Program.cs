@@ -1,9 +1,6 @@
 using Contacts.Data;
-using Contacts.Services;
 using Contacts.Repositories;
-using Contacts.Controllers;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using Contacts.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +12,10 @@ builder.Services.AddControllers();
 builder.Services.AddDataServices(builder.Configuration);
 builder.Services.AddAppServices();
 builder.Services.AddRepoServices();
+
+builder.Services.AddAuthorization();
+
+builder.Services.AddApplicationInsightsTelemetry();
 
 var app = builder.Build();
 
